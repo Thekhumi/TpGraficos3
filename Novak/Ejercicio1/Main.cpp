@@ -12,7 +12,9 @@ const int SCREEN_W = 640;	//ancho de pantalla
 const int SCREEN_H = 480;	//largo de pantalla
 const int PLAYER_SIZE = 32;	//tamaño de imagen de  jugador
 const int ENEMY_SIZE = 32;	// tamaño de imagen de enemigo
-
+enum MYKEYS {
+	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
+};
 int main(int argc, char **argv)
 {
 	ALLEGRO_DISPLAY *display = NULL;					// pantalla
@@ -26,6 +28,7 @@ int main(int argc, char **argv)
 	float enemy_y = 0;									//posicion en y de enemigo
 	bool redraw = true;
 	bool doexit = false;
+	bool key[4] = { false, false, false, false };		//arreglo de teclas
 	/*inicializo allegro*/
 	if (!al_init()) {
 		al_show_native_message_box(display, "Error", "Error", "Failed to initialize allegro!",
@@ -51,6 +54,12 @@ int main(int argc, char **argv)
 		al_show_native_message_box(display, "Error", "Error", "Failed to initialize display!",
 			NULL, ALLEGRO_MESSAGEBOX_ERROR);
 		al_destroy_timer(timer);
+		return -1;
+	}
+	/*inicializo teclado*/
+	if (!al_install_keyboard()) {
+		al_show_native_message_box(display, "Error", "Error", "Failed to initialize keyboard!",
+			NULL, ALLEGRO_MESSAGEBOX_ERROR);
 		return -1;
 	}
 	/*cargo la imagen del player*/
@@ -92,6 +101,8 @@ int main(int argc, char **argv)
 
 	al_register_event_source(event_queue, al_get_timer_event_source(timer)); //inicializo eventos de timer
 
+	al_register_event_source(event_queue, al_get_keyboard_event_source()); //inicializo eventos de teclado
+
 	al_clear_to_color(al_map_rgb(0, 0, 0)); //pongo pantalla en negro
 
 	al_flip_display();
@@ -101,7 +112,70 @@ int main(int argc, char **argv)
 	{
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
+		if (ev.type == ALLEGRO_EVENT_TIMER) {
+			if (key[KEY_UP] && player_y >= 4.0) {
+				player_y -= 4.0;
+			}
 
+			if (key[KEY_DOWN] && player_y <= SCREEN_H - PLAYER_SIZE - 4.0) {
+				player_y += 4.0;
+			}
+
+			if (key[KEY_LEFT] && player_x >= 4.0) {
+				player_x -= 4.0;
+			}
+
+			if (key[KEY_RIGHT] && player_x <= SCREEN_W - PLAYER_SIZE - 4.0) {
+				player_x += 4.0;
+			}
+
+			redraw = true;
+		}
+		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			break;
+		}
+		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+			switch (ev.keyboard.keycode) {
+			case ALLEGRO_KEY_UP:
+				key[KEY_UP] = true;
+				break;
+
+			case ALLEGRO_KEY_DOWN:
+				key[KEY_DOWN] = true;
+				break;
+
+			case ALLEGRO_KEY_LEFT:
+				key[KEY_LEFT] = true;
+				break;
+
+			case ALLEGRO_KEY_RIGHT:
+				key[KEY_RIGHT] = true;
+				break;
+			}
+		}
+		else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
+			switch (ev.keyboard.keycode) {
+			case ALLEGRO_KEY_UP:
+				key[KEY_UP] = false;
+				break;
+
+			case ALLEGRO_KEY_DOWN:
+				key[KEY_DOWN] = false;
+				break;
+
+			case ALLEGRO_KEY_LEFT:
+				key[KEY_LEFT] = false;
+				break;
+
+			case ALLEGRO_KEY_RIGHT:
+				key[KEY_RIGHT] = false;
+				break;
+
+			case ALLEGRO_KEY_ESCAPE:
+				doexit = true;
+				break;
+			}
+		}
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
