@@ -15,6 +15,12 @@ const int ENEMY_SIZE = 32;	// tamaño de imagen de enemigo
 enum MYKEYS {
 	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
 };
+
+bool colision(float player_x, float player_y, int PLAYER_SIZE, float enemy_x, float  enemy_y, int ENEMY_SIZE) {
+	return ((player_x < enemy_x + ENEMY_SIZE) && (enemy_x < player_x + PLAYER_SIZE)
+		&& (player_y < enemy_y + ENEMY_SIZE) && (enemy_y < player_y + PLAYER_SIZE));
+}
+
 int main(int argc, char **argv)
 {
 	ALLEGRO_DISPLAY *display = NULL;					// pantalla
@@ -176,6 +182,12 @@ int main(int argc, char **argv)
 				break;
 			}
 		}
+
+		/*colisiones jugador-ememigo*/
+		if (colision(player_x, player_y, PLAYER_SIZE,
+			enemy_x, enemy_y, ENEMY_SIZE))
+			doexit = true;
+
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
