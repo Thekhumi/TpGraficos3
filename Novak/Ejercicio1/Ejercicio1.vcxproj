@@ -94,7 +94,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\lib;$(SolutionDir)Libs\Allegro\allegro_dependencies_x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;opengl32.lib;psapi.lib;shlwapi.lib;jpeg.lib;libpng16.lib;zlib.lib;allegro-debug.lib;allegro_ttf-debug.lib;allegro_primitives-debug.lib;allegro_main-debug.lib;allegro_image-debug.lib;allegro_color-debug.lib;allegro_memfile-debug.lib;allegro_dialog-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;opengl32.lib;psapi.lib;shlwapi.lib;jpeg.lib;libpng16.lib;zlib.lib;allegro-debug.lib;allegro_ttf-debug.lib;allegro_primitives-debug.lib;allegro_main-debug.lib;allegro_image-debug.lib;allegro_color-debug.lib;allegro_memfile-debug.lib;allegro_dialog-debug.lib;allegro_audio-debug.lib;allegro_acodec-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -106,8 +106,11 @@ copy "$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\bin\allegro_memfile-debug-5.
 copy "$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\bin\allegro_primitives-debug-5.1.dll" "$(OutDir)"
 copy "$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\bin\allegro_ttf-debug-5.1.dll" "$(OutDir)"
 copy "$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\bin\allegro_dialog-debug-5.1.dll" "$(OutDir)"
+copy "$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\bin\allegro_audio-debug-5.1.dll" "$(OutDir)"
+copy "$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\bin\allegro_acodec-debug-5.1.dll" "$(OutDir)"
 copy "$(SolutionDir)Ejercicio1\player.png" "$(OutDir)"
-copy "$(SolutionDir)Ejercicio1\enemy.png" "$(OutDir)"</Command>
+copy "$(SolutionDir)Ejercicio1\enemy.png" "$(OutDir)"
+copy "$(SolutionDir)Ejercicio1\menu.png" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,7 +133,7 @@ copy "$(SolutionDir)Ejercicio1\enemy.png" "$(OutDir)"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\Allegro\allegro_5.1.12_x86\lib;$(SolutionDir)Libs\Allegro\allegro_dependencies_x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;opengl32.lib;psapi.lib;shlwapi.lib;jpeg.lib;libpng16.lib;zlib.lib;allegro-static.lib;allegro_ttf-static.lib;allegro_primitives-static.lib;allegro_main-static.lib;allegro_image-static.lib;allegro_color-static.lib;allegro_memfile-static.lib;allegro_dialog-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;opengl32.lib;psapi.lib;shlwapi.lib;jpeg.lib;libpng16.lib;zlib.lib;allegro-static.lib;allegro_ttf-static.lib;allegro_primitives-static.lib;allegro_main-static.lib;allegro_image-static.lib;allegro_color-static.lib;allegro_memfile-static.lib;allegro_dialog-static.lib;allegro_audio-static.lib;allegro_acodec-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
