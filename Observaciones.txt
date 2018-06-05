@@ -1,6 +1,6 @@
 -Se agregó controles para espacio.
+-Se agrego clase bala.
 -El jugador puede disparar.
--El jugador gana si mata al enemigo.
 -Se edito el tamaño del enemigo para ser mas representativo del sprite.
 -Se agregaron 2 enemigos.
 -Las balas se desactivan si salen del mundo.
@@ -8,3 +8,5 @@
 -Player tiene vidas, cada monstruo le resta 1 (se muere el monstruo tambien), si llega a 0 pierde.
 -Movimiento de enemigos, una vez muertos aparecen nuevos.
 -Hay un menu de inicio, ESCAPE te quita del juego, espacio lo comienza.
+-Se incluye Audio de disparo/perder vida.
+-Se agrego la desinstalacion de elementos previamente instalados.
